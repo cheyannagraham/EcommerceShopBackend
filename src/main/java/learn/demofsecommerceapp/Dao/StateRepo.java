@@ -12,6 +12,6 @@ import java.util.List;
 public interface StateRepo extends JpaRepository<State, Long> {
 
     @Transactional(readOnly = true)
-    List<State> findAllByCountryId(@Param("countryId") Long countryId); // do I need Long countryId? not using it
+    List<State> findAllByCountryId(@Param("countryId") Long countryId); // do I need Long countryId? not using it // yes, needed for rest binding (spring magic)
 
 }
