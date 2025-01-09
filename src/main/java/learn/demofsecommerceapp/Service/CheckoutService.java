@@ -8,6 +8,8 @@ import learn.demofsecommerceapp.Entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class CheckoutService {
     CustomerRepo customerRepo;
@@ -20,6 +22,7 @@ public class CheckoutService {
     public PurchaseResponseDto checkout(PurchaseDto purchaseDto) {
         System.out.println("PurchaseDto: " + purchaseDto);
         Order order = new Order();
+        order.setOrderTrackingNumber(UUID.randomUUID().toString());
         order.setCustomer(purchaseDto.getCustomer());
         order.setOrderItems(purchaseDto.getOrderItems());
         order.setShippingAddress(purchaseDto.getShippingAddress());
