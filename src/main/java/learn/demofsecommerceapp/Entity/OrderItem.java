@@ -15,7 +15,7 @@ public class OrderItem {
     private String imageUrl;
 
     @Column(name="unit_price")
-    private BigDecimal UnitPrice;
+    private BigDecimal unitPrice;
 
     @Column(name="quantity")
     private int quantity;
@@ -44,11 +44,11 @@ public class OrderItem {
     }
 
     public BigDecimal getUnitPrice() {
-        return UnitPrice;
+        return unitPrice;
     }
 
     public void setUnitPrice(BigDecimal price) {
-        this.UnitPrice = price;
+        this.unitPrice = price;
     }
 
     public int getQuantity() {
@@ -73,5 +73,17 @@ public class OrderItem {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", UnitPrice=" + unitPrice +
+                ", quantity=" + quantity +
+                ", productId=" + productId +
+                ", order=" + order +
+                '}';
     }
 }
