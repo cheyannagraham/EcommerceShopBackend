@@ -1,10 +1,12 @@
 package learn.demofsecommerceapp.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name="orders")
@@ -38,8 +40,8 @@ public class Order {
     @JoinColumn(name="customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
-    private Set<OrderItem> orderItems;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="shipping_address_id")
@@ -135,5 +137,27 @@ public class Order {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItem.setOrder(this);
+        this.orderItems.add(orderItem);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", OrderTrackingNumber='" + OrderTrackingNumber + '\'' +
+                ", totalQuantity=" + totalQuantity +
+                ", totalPrice=" + totalPrice +
+                ", status='" + status + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", lastUpdated=" + lastUpdated +
+                ", customer=" + customer +
+                ", orderItems=" + orderItems +
+                ", shippingAddress=" + shippingAddress +
+                ", billingAddress=" + billingAddress +
+                '}';
     }
 }

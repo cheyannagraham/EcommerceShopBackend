@@ -20,17 +20,20 @@ public class CheckoutService {
     }
 
     public PurchaseResponseDto checkout(PurchaseDto purchaseDto) {
-        System.out.println("PurchaseDto: " + purchaseDto);
         Order order = new Order();
         order.setOrderTrackingNumber(UUID.randomUUID().toString());
         order.setCustomer(purchaseDto.getCustomer());
-        order.setOrderItems(purchaseDto.getOrderItems());
         order.setShippingAddress(purchaseDto.getShippingAddress());
         order.setBillingAddress(purchaseDto.getBillingAddress());
+
+        purchaseDto.getOrderItems().forEach(order::addOrderItem);
+
         Customer customer = order.getCustomer();
         customer.addOrder(order);
 
         customerRepo.save(customer);
+
+//        RETURN OBJECT
         PurchaseResponseDto purchaseResponseDto = new PurchaseResponseDto();
         purchaseResponseDto.setOrderTrackingNumber(order.getOrderTrackingNumber());
         return purchaseResponseDto;
