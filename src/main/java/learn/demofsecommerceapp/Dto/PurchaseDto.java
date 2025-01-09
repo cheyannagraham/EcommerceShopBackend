@@ -1,15 +1,16 @@
 package learn.demofsecommerceapp.Dto;
 
-import jakarta.persistence.criteria.Order;
 import learn.demofsecommerceapp.Entity.Address;
 import learn.demofsecommerceapp.Entity.Customer;
+import learn.demofsecommerceapp.Entity.Order;
 import learn.demofsecommerceapp.Entity.OrderItem;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+
 @Component
-public class Purchase {
+public class PurchaseDto {
     private Customer customer;
     private Address shippingAddress;
     private Address billingAddress;

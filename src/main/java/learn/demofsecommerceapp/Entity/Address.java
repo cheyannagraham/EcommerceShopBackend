@@ -2,6 +2,9 @@ package learn.demofsecommerceapp.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="address")
 public class Address {
@@ -23,9 +26,6 @@ public class Address {
 
     @Column(name="zip_code")
     private String zipCode;
-
-    @OneToOne
-    private Order order;
 
     public long getId() {
         return id;
@@ -73,13 +73,5 @@ public class Address {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 }

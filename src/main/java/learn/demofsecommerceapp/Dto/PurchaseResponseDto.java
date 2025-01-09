@@ -1,6 +1,6 @@
 package learn.demofsecommerceapp.Dto;
 
-public class PurchaseResponse {
+public class PurchaseResponseDto {
     private long orderTrackingNumber;
 
     public long getOrderTrackingNumber() {

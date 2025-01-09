@@ -21,8 +21,8 @@ public class Customer {
     @Column(name="email")
     private String email;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @Column(name="orders")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "customer")
+    @Column(name="order_id")
     private Set<Order> orders = new HashSet<>();
 
     public long getId() {
@@ -63,5 +63,9 @@ public class Customer {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
     }
 }

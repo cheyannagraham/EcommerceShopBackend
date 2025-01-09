@@ -39,14 +39,13 @@ public class Order {
     private Customer customer;
 
     @OneToMany(mappedBy = "order")
-    @JoinColumn(name="order_item")
     private Set<OrderItem> orderItems;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="shipping_address_id")
     private Address shippingAddress;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="billing_address_id")
     private Address billingAddress;
 
