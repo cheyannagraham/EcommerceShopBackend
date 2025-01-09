@@ -58,7 +58,7 @@ public class DemoFSecommerceappApplication {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             PurchaseDto purchaseDto = objectMapper.readValue(purchaseData, PurchaseDto.class);
-            checkoutService.checkout(purchaseDto);
+            System.out.println(checkoutService.checkout(purchaseDto).getOrderTrackingNumber());
         } catch (Exception e) {
             e.printStackTrace();
         }

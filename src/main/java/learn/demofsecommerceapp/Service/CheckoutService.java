@@ -31,6 +31,8 @@ public class CheckoutService {
         customer.addOrder(order);
 
         customerRepo.save(customer);
-        return null;
+        PurchaseResponseDto purchaseResponseDto = new PurchaseResponseDto();
+        purchaseResponseDto.setOrderTrackingNumber(order.getOrderTrackingNumber());
+        return purchaseResponseDto;
     }
 }

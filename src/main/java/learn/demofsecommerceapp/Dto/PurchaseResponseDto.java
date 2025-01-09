@@ -1,13 +1,13 @@
 package learn.demofsecommerceapp.Dto;
 
 public class PurchaseResponseDto {
-    private long orderTrackingNumber;
+    private String orderTrackingNumber;
 
-    public long getOrderTrackingNumber() {
+    public String getOrderTrackingNumber() {
         return orderTrackingNumber;
     }
 
-    public void setOrderTrackingNumber(long orderTrackingNumber) {
+    public void setOrderTrackingNumber(String orderTrackingNumber) {
         this.orderTrackingNumber = orderTrackingNumber;
     }
 }
