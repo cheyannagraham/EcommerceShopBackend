@@ -21,7 +21,7 @@ public class CheckoutService {
         this.customerRepo = customerRepo;
     }
 
-    public PurchaseResponseDto checkout(PurchaseDto purchaseDto) {
+    public String checkout(PurchaseDto purchaseDto) {
         Order order = new Order();
         order.setOrderTrackingNumber(UUID.randomUUID().toString());
         order.setCustomer(purchaseDto.getCustomer());
@@ -34,6 +34,6 @@ public class CheckoutService {
 
         customerRepo.save(customer);
 
-        return new PurchaseResponseDto(order.getOrderTrackingNumber());
+        return new PurchaseResponseDto(order.getOrderTrackingNumber()).getOrderTrackingNumber();
     }
 }
