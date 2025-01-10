@@ -1,6 +1,7 @@
 package learn.demofsecommerceapp.Controller;
 
 import learn.demofsecommerceapp.Dto.PurchaseDto;
+import learn.demofsecommerceapp.Dto.PurchaseResponseDto;
 import learn.demofsecommerceapp.Service.CheckoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,9 @@ public class CheckoutController {
         this.checkoutService = checkoutService;
     }
 
-    @PostMapping("/checkout")
+    @PostMapping("/checkout/purchase")
     @ResponseBody
-    public String checkout(@RequestBody PurchaseDto purchase) {
+    public PurchaseResponseDto checkout(@RequestBody PurchaseDto purchase) {
         System.out.println("-".repeat(20));
         System.out.println("Saving Purchase");
         return this.checkoutService.checkout(purchase);

@@ -21,19 +21,19 @@ public class CheckoutService {
         this.customerRepo = customerRepo;
     }
 
-    public String checkout(PurchaseDto purchaseDto) {
-        Order order = new Order();
+    public PurchaseResponseDto checkout(PurchaseDto purchaseDto) {
+        Order order = purchaseDto.getOrder();
         order.setOrderTrackingNumber(UUID.randomUUID().toString());
         order.setCustomer(purchaseDto.getCustomer());
         order.setShippingAddress(purchaseDto.getShippingAddress());
         order.setBillingAddress(purchaseDto.getBillingAddress());
         purchaseDto.getOrderItems().forEach(order::addOrderItem);
 
-        Customer customer = order.getCustomer();
+        Customer customer = purchaseDto.getCustomer();
         customer.addOrder(order);
 
         customerRepo.save(customer);
 
-        return new PurchaseResponseDto(order.getOrderTrackingNumber()).getOrderTrackingNumber();
+        return new PurchaseResponseDto(order.getOrderTrackingNumber());
     }
 }

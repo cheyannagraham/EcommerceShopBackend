@@ -35,7 +35,7 @@ public class Order {
     @UpdateTimestamp
     private Date lastUpdated;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="customer_id")
     private Customer customer;
 
