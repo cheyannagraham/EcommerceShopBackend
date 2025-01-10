@@ -27,6 +27,10 @@ public class Address {
     @Column(name="zip_code")
     private String zipCode;
 
+    @OneToOne(cascade=CascadeType.ALL)
+    @PrimaryKeyJoinColumn() //specify the primary key of the associated entity as the foreign key of the current entity.
+    private Order order;
+
     public long getId() {
         return id;
     }

@@ -1,6 +1,5 @@
 package learn.demofsecommerceapp.Entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -44,11 +43,11 @@ public class Order {
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="shipping_address_id")
+    @JoinColumn(name="shipping_address_id", referencedColumnName = "id")
     private Address shippingAddress;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="billing_address_id")
+    @JoinColumn(name="billing_address_id", referencedColumnName = "id")
     private Address billingAddress;
 
     public long getId() {
