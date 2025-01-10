@@ -7,12 +7,14 @@ import learn.demofsecommerceapp.Entity.Customer;
 import learn.demofsecommerceapp.Entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
+@Transactional
 public class CheckoutService {
-    CustomerRepo customerRepo;
+    private final CustomerRepo customerRepo;
 
     @Autowired
     public CheckoutService(CustomerRepo customerRepo) {
@@ -25,7 +27,6 @@ public class CheckoutService {
         order.setCustomer(purchaseDto.getCustomer());
         order.setShippingAddress(purchaseDto.getShippingAddress());
         order.setBillingAddress(purchaseDto.getBillingAddress());
-
         purchaseDto.getOrderItems().forEach(order::addOrderItem);
 
         Customer customer = order.getCustomer();
@@ -33,9 +34,6 @@ public class CheckoutService {
 
         customerRepo.save(customer);
 
-//        RETURN OBJECT
-        PurchaseResponseDto purchaseResponseDto = new PurchaseResponseDto();
-        purchaseResponseDto.setOrderTrackingNumber(order.getOrderTrackingNumber());
-        return purchaseResponseDto;
+        return new PurchaseResponseDto(order.getOrderTrackingNumber());
     }
 }
