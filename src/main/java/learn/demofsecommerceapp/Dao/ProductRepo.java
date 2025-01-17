@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${app.frontUrl}")
 //@RepositoryRestResource(excerptProjection = CategoryIdProjection.class)
 public interface ProductRepo extends JpaRepository<Product, Long> {
     Page<Product> findByCategoryId(@Param("categoryId") Long categoryId, Pageable pageable);

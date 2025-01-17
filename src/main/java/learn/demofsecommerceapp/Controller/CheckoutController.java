@@ -4,11 +4,12 @@ import learn.demofsecommerceapp.Dto.PurchaseDto;
 import learn.demofsecommerceapp.Dto.PurchaseResponseDto;
 import learn.demofsecommerceapp.Service.CheckoutService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${app.frontUrl}")
 public class CheckoutController {
 
     CheckoutService checkoutService;

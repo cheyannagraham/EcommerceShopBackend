@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${app.frontUrl}")
 public interface CountryRepo extends JpaRepository<Country, Long> {
 
     @Transactional(readOnly = true)
