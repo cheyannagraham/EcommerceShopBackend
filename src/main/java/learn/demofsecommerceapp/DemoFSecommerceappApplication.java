@@ -16,16 +16,5 @@ public class DemoFSecommerceappApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoFSecommerceappApplication.class, args);
     }
-
-    @Bean
-    public TomcatServletWebServerFactory tomcat() {
-        return new TomcatServletWebServerFactory(){
-            @Override
-            protected void customizeConnector(Connector connector){
-                connector.setPort(Integer.parseInt(System.getenv("PORT")));
-            }
-        };
-    }
-
 }
 
