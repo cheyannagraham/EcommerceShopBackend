@@ -20,6 +20,7 @@ public class CorsConfig{
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(consumer));
+        config.setAllowedHeaders(List.of("*")); //may not be secure
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
