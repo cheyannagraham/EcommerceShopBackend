@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-@CrossOrigin("${app.frontUrl}")
 public interface StateRepo extends JpaRepository<State, Long> {
 
     @Transactional(readOnly = true)
