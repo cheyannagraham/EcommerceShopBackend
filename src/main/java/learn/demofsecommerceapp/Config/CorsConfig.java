@@ -19,7 +19,7 @@ public class CorsConfig{
         System.out.println("CONSUMER: " + consumer);
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedOrigins(List.of(consumer));
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
