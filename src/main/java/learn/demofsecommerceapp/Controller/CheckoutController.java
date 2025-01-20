@@ -17,7 +17,7 @@ public class CheckoutController {
         this.checkoutService = checkoutService;
     }
 
-    @PostMapping("/checkout/purchase")
+    @PostMapping("/api/checkout/purchase")
     @ResponseBody
     public PurchaseResponseDto checkout(@RequestBody PurchaseDto purchase) {
         System.out.println("-".repeat(20));
