@@ -21,6 +21,7 @@ public class CorsConfig{
         final CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(consumer));
         config.setAllowedHeaders(List.of("*")); //may not be secure
+        config.setAllowedMethods(List.of("GET", "POST"));
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
