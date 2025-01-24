@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.data.rest.core.config.Projection;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 
 //@RepositoryRestResource(excerptProjection = CategoryIdProjection.class)
+@RestResource
 public interface ProductRepo extends JpaRepository<Product, Long> {
     Page<Product> findByCategoryId(@Param("categoryId") Long categoryId, Pageable pageable);
     Page<Product> findProductsByNameContainingIgnoreCase(@Param("keyword") String keyword, Pageable pageable);
