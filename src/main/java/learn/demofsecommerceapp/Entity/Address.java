@@ -3,6 +3,7 @@ package learn.demofsecommerceapp.Entity;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -30,6 +31,18 @@ public class Address {
     @OneToOne(cascade=CascadeType.ALL)
     @PrimaryKeyJoinColumn() //specify the primary key of the associated entity as the foreign key of the current entity.
     private Order order;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(street, address.street) && Objects.equals(city, address.city) && Objects.equals(state, address.state) && Objects.equals(country, address.country) && Objects.equals(zipCode, address.zipCode) && Objects.equals(order, address.order);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id,street, city, state, country, zipCode, order);
+    }
 
     public long getId() {
         return id;

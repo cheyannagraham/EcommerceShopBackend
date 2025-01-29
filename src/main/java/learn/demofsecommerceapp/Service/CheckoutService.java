@@ -36,28 +36,18 @@ public class CheckoutService {
         Customer customer = this.customerRepo.findByEmail(purchaseDto.getCustomer().getEmail()).orElse(purchaseDto.getCustomer());
 
         //Find address
-
-        // Set matcher configs
-        ExampleMatcher addressMatcher = ExampleMatcher.matchingAll()
-                .withIgnorePaths("id")
-                .withIgnoreCase();
-
-        // Build matcher examples
-        Example<Address> billingExample = Example.of(purchaseDto.getBillingAddress(), addressMatcher);
-        Example<Address> shippingExample = Example.of(purchaseDto.getShippingAddress(), addressMatcher);
-
-        // Determine if records exists
-        Address bAddress = this.addressRepo.findOne(billingExample).orElse(purchaseDto.getBillingAddress());
-        Address sAddress = this.addressRepo.findOne(shippingExample).orElse(purchaseDto.getShippingAddress());
+        Address shipppingAddress = this.addressExists(purchaseDto.getShippingAddress()).orElse(purchaseDto.getShippingAddress());
+        Address billingAddress;
+        if (purchaseDto.getShippingAddress().equals(purchaseDto.getBillingAddress())) {
+            System.out.println("Addresses are the same");
+            billingAddress = shipppingAddress;
+        } else
+            billingAddress = this.addressExists(purchaseDto.getBillingAddress()).orElse(purchaseDto.getBillingAddress());
 
         order.setCustomer(customer);
 
-        order.setShippingAddress(sAddress);
-        if(bAddress.equals(sAddress)) {
-            order.setBillingAddress(sAddress);
-        } else {
-            order.setBillingAddress(bAddress);
-        }
+        order.setShippingAddress(shipppingAddress);
+        order.setBillingAddress(billingAddress);
 
         purchaseDto.getOrderItems().forEach(order::addOrderItem);
 
@@ -66,5 +56,19 @@ public class CheckoutService {
         customerRepo.save(customer);
 
         return new PurchaseResponseDto(order.getOrderTrackingNumber());
+    }
+
+
+    Optional<Address> addressExists(Address address) {
+        // Set matcher configs
+        ExampleMatcher addressMatcher = ExampleMatcher.matchingAll()
+                .withIgnorePaths("id")
+                .withIgnoreCase();
+
+        // Build matcher examples
+        Example<Address> addressExample = Example.of(address, addressMatcher);
+
+        // Return record if exists
+        return this.addressRepo.findOne(addressExample);
     }
 }
