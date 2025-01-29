@@ -47,12 +47,18 @@ public class CheckoutService {
         Example<Address> shippingExample = Example.of(purchaseDto.getShippingAddress(), addressMatcher);
 
         // Determine if records exists
-        Address bAdress = this.addressRepo.findOne(billingExample).orElse(purchaseDto.getBillingAddress());
-        Address sAdress = this.addressRepo.findOne(shippingExample).orElse(purchaseDto.getShippingAddress());
+        Address bAddress = this.addressRepo.findOne(billingExample).orElse(purchaseDto.getBillingAddress());
+        Address sAddress = this.addressRepo.findOne(shippingExample).orElse(purchaseDto.getShippingAddress());
 
         order.setCustomer(customer);
-        order.setShippingAddress(sAdress);
-        order.setBillingAddress(bAdress);
+
+        order.setShippingAddress(sAddress);
+        if(bAddress.equals(sAddress)) {
+            order.setBillingAddress(sAddress);
+        } else {
+            order.setBillingAddress(bAddress);
+        }
+
         purchaseDto.getOrderItems().forEach(order::addOrderItem);
 
         customer.addOrder(order);
